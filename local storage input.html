@@ -1,0 +1,39 @@
+<html>
+    <head>
+        <script>
+        window.onload = function(){
+            var m = localStorage.getItem('maaltijdenarray');
+            if(m != undefined){
+                maaltijden = JSON.parse(m);
+            }
+        }
+        function etenladen(){
+            alert();
+            var lunch1 = {
+                datum: document.getElementById("dateinput").value,
+                weekdag: document.getElementById("weekdaginput").value
+            }
+            maaltijden.push(lunch1);
+            console.log(maaltijden);
+            var eindString = "";
+            for(var x = 0; x < maaltijden.length; x ++){
+                eindString += "<tr><td>" + maaltijden[x].datum + "</td><td>" + maaltijden[x].weekdag + "</td></tr>";
+            }
+            document.getElementById("deLunch").innerHTML = eindString;
+            var maaltijdenjson = JSON.stringify(maaltijden);
+            localStorage.setItem('maaltijdenarray', maaltijdenjson);
+        }
+        var maaltijden = [];
+    </script>
+    </head>
+    <body>
+        <input type=button onclick=etenladen() value=toevoegen >
+        <br>
+        weekdag<input type=text id=weekdaginput >
+        <br>
+        datum <input type="date" id=dateinput>
+        <table id = deLunch>
+        </table>
+    </body>
+
+</html>
